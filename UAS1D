@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+
+public class UAS1D {
+    public static void main(String[] args) {
+        String client_key = "wSCoGfXjRczziGCxJzKG0AHeDDD1AvZKxj00VItiDy00Pjcd";
+        String[] p = client_key.split("");
+        ArrayList<Integer> s = new ArrayList<>();
+
+        for (int index = 0; index < p.length; index++) {
+            s.add(GetCountTheSame(p[index]));
+        }
+
+        for (int index1 = 0; index1 < s.size(); index1++) {
+            int t = s.get(index1);
+            System.out.println("Key " + index1 + " is: " + t);
+        }
+    }
+
+    private static int GetCountTheSame(String input) {
+        int multiplier;
+
+        // Check if the character is lowercase
+        if (Character.isLowerCase(input.charAt(0))) {
+            multiplier = 2;
+        } else {
+            // Character is uppercase
+            multiplier = 3;
+        }
+
+        // Multiply the count by the appropriate multiplier
+        return countOccurrences(input, input.toLowerCase()) * multiplier;
+    }
+
+    private static int countOccurrences(String input, String target) {
+        int count = 0;
+        int lastIndex = 0;
+
+        while ((lastIndex = input.indexOf(target, lastIndex)) != -1) {
+            count++;
+            lastIndex += target.length();
+        }
+
+        return count;
+    }
+}
